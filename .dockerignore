@@ -1,0 +1,12 @@
+# Don't copy these files into the image (keeps it small)
+.git
+
+node_modules
+vendor
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+tests
+.dockerignore
+README.md

@@ -18,11 +18,25 @@
       <a href="/" class="btn btn-ghost text-xl">🐦 Chirper</a>
     </div>
     <div class="navbar-end gap-2">
-      <a href="#" class="btn btn-ghost btn-sm">Sign In</a>
-      <a href="#" class="btn btn-primary btn-sm">Sign Up</a>
+      @auth
+      <span class="text-sm">{{ auth()->user()->name }}</span>
+      <form method="POST" action="{{ route('logout') }}" class="inline">
+        @csrf
+        <button type="submit" class="btn btn-ghost btn-sm">Logout</button>
+      </form>
+      @else
+      <a href="{{ route('login')}}" class="btn btn-ghost btn-sm">Sign In</a>
+      <a href="{{ route('register')}}" class="btn btn-primary btn-sm">Sign Up</a>
+      @endauth
+
     </div>
   </nav>
 
+
+  <!-- Success Toast -->
+  @if (session('success'))
+  <x-toast.success />
+  @endif
   <main class="flex-1 container mx-auto px-4 py-8">
     {{ $slot }}
   </main>

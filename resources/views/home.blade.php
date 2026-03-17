@@ -1,16 +1,19 @@
-<x-layout>
-  <x-slot:title>
-    Welcome
-  </x-slot:title>
+<x-layouts.layout>
+  <x-slot name=title>
+    Home Feed
+  </x-slot>
+
   <div class="max-w-2xl mx-auto">
-    <div class="card bg-base-100 shadow mt-8">
-      <div class="card-body">
-        <div>
-          <h1 class="text-3xl font-bold">Welcome to Chirper!</h1>
-          <p class="mt-4 text-base-content/60">This is your brand new Laravel application. Time to make it
-            sing (or chirp)!</p>
-        </div>
-      </div>
+    <h1 class="text-3xl font-bold mt-8">Latest Chirps</h1>
+    <!-- Chirp Form -->
+    <x-chirp.form />
+    <!-- Feed -->
+    <div class="space-y-4 mt-8">
+      @forelse ($chirps as $chirp)
+      <x-chirp :chirp="$chirp" />
+      @empty
+      <x-chirp.empty />
+      @endforelse
     </div>
   </div>
-</x-layout>
+</x-layouts.layout>

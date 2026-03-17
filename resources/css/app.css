@@ -12,8 +12,11 @@
     --animate-fade-out: fade-out 4s ease-in-out forwards;
  
     @keyframes fade-out {
-        0%, 70% {
+        0%, 50% {
             opacity: 1;
+        }
+        75% {
+          transform:translate-x
         }
         100% {
             opacity: 0;
