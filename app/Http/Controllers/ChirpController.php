@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chirp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ChirpController extends Controller
 {
@@ -42,8 +43,11 @@ class ChirpController extends Controller
         // Create the chirp (no user for now - we'll add auth later)
         Chirp::create([
             'message' => $validated['message'],
-            'user_id' => $request->user()->id,
+            'user_id' => $request->user()->id ?? null,
         ]);
+
+        Log::info('Is authenticated? '.(auth()->check() ? 'Yes' : 'No'));
+        Log::info(['Is THE ID? ' => auth()->id()]);
 
         // Redirect back to the feed
         return redirect('/')->with('success', 'You chirp has been posted!');
