@@ -3,7 +3,7 @@ name: Laravel Docker CI/CD
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   IMAGE_NAME: mattthecoder/chirper
