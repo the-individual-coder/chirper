@@ -55,6 +55,10 @@ RUN echo '<VirtualHost *:80>\n\
 # Fix main Apache config to allow .htaccess
 RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
+RUN mkdir -p database \
+    && touch database/database.sqlite \
+    && chmod -R 777 database
+    
 # Install dependencies
 RUN composer install --no-interaction
 
