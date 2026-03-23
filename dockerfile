@@ -1,6 +1,6 @@
 FROM php:8.4-apache
 
-# Install system dependencies
+# Install system dependencies INCLUDING NODE.JS
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
+    nodejs \
+    npm \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -40,7 +42,7 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 777 /var/www/html/storage \
     && chmod -R 777 /var/www/html/bootstrap/cache
 
-# **CRITICAL: Configure Apache for Laravel**
+# Configure Apache for Laravel
 RUN echo '<VirtualHost *:80>\n\
     DocumentRoot /var/www/html/public\n\
     <Directory /var/www/html/public>\n\
@@ -63,7 +65,7 @@ RUN mkdir -p database \
 RUN npm install
 RUN npm run build
 
-# Install dependencies
+# Install PHP dependencies
 RUN composer install --no-interaction
 
 # Generate key if needed
