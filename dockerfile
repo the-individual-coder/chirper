@@ -58,7 +58,11 @@ RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 RUN mkdir -p database \
     && touch database/database.sqlite \
     && chmod -R 777 database
-    
+
+# Install Node dependencies and build Vite assets
+RUN npm install
+RUN npm run build
+
 # Install dependencies
 RUN composer install --no-interaction
 
