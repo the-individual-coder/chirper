@@ -28,4 +28,4 @@ jobs:
 
       - name: Push image
         run: |
-          docker push $IMAGE_NAME:dev-${{ github.run_id }}
+          docker push $IMAGE_NAME:dev-v1.0.0
